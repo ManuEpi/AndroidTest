@@ -6,11 +6,11 @@ import com.google.gson.annotations.SerializedName
 data class Currency(
     @SerializedName("CoinInfo")
     @Expose
-    var coinInfo: CoinInfo,
+    var coinInfo: CoinInfo?,
 
     @SerializedName("RAW")
     @Expose
-    var raw: RawSubObject,
+    var raw: RawSubObject?,
 
     @SerializedName("DISPLAY")
     @Expose

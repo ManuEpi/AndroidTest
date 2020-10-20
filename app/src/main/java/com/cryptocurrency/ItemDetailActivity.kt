@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.cryptocurrency.models.topMarket.Currency
 import com.google.gson.Gson
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * An activity representing a single Item detail screen. This
@@ -15,6 +16,7 @@ import com.google.gson.Gson
  * item details are presented side-by-side with a list of items
  * in a [ItemListActivity].
  */
+@ExperimentalCoroutinesApi
 class ItemDetailActivity : AppCompatActivity() {
 
     private var item: Currency? = null

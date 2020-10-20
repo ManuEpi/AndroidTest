@@ -38,20 +38,23 @@ class ItemDetailFragment : Fragment(R.layout.item_detail) {
     ): View? {
         val rootView = inflater.inflate(R.layout.item_detail, container, false)
 
-        item?.let {
+        item?.let { item ->
 
-            if (it.coinInfo != null)
-                rootView.findViewById<TextView>(R.id.idItem).text = " Id : ${it.coinInfo.id}"
+            item.coinInfo?.let {
+                rootView.findViewById<TextView>(R.id.idItem).text = " Id : ${it.id}"
+            }
 
-            if (it.raw != null) {
+            item.raw?.let {
+
                 rootView.findViewById<TextView>(R.id.fromToSymbol).text =
-                    "FromToSymbol : ${it.raw.eur.fromSymbol} -> ${it.raw.eur.toSymbol}"
+                    "FromToSymbol : ${it.eur.fromSymbol} -> ${it.eur.toSymbol}"
                 rootView.findViewById<TextView>(R.id.price).text =
-                    "Price : ${it.raw.eur.price.toString()}"
+                    "Price : ${it.eur.price.toString()}"
                 rootView.findViewById<TextView>(R.id.volumeDayTo).text =
-                    "VolumeDayTo : ${it.raw.eur.volumeDayTo.toString()}"
+                    "VolumeDayTo : ${it.eur.volumeDayTo.toString()}"
                 rootView.findViewById<TextView>(R.id.volume24HourTo).text =
-                    "Volume24HourTo : ${it.raw.eur.volume24HourTo.toString()}"
+                    "Volume24HourTo : ${it.eur.volume24HourTo.toString()}"
+
             }
         }
 

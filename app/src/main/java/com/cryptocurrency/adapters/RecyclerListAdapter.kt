@@ -16,6 +16,7 @@ import com.cryptocurrency.models.topMarket.Currency
 import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class RecyclerListAdapter @ExperimentalCoroutinesApi constructor(
     private val parentActivity: ItemListActivity,
     private val values: Array<Currency>,
@@ -27,7 +28,6 @@ class RecyclerListAdapter @ExperimentalCoroutinesApi constructor(
 
     init {
         onClickListener = View.OnClickListener { v ->
-            val item = v.tag as Currency
 
             if (twoPane) {
                 val fragment = ItemDetailFragment().apply {
@@ -65,12 +65,16 @@ class RecyclerListAdapter @ExperimentalCoroutinesApi constructor(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.idView.text = position.toString()
-        holder.contentView.text = "${item.coinInfo.fullName}"
 
-        if (item.raw != null)
+        item.coinInfo?.let {
+            holder.contentView.text = "${it.fullName}"
+        }
+
+        item.raw?.let {
             holder.contentView.text =
-                holder.contentView.text as String + " // From:${item.raw.eur.fromSymbol} ->" +
-                        " To:${item.raw.eur.toSymbol} // ${item.raw.eur.price} €"
+                holder.contentView.text as String + " // From:${it.eur.fromSymbol} ->" +
+                        " To:${it.eur.toSymbol} // ${it.eur.price} €"
+        }
 
         with(holder.itemView) {
             tag = item
